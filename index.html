@@ -18,7 +18,8 @@
             });
             console.log('Fetch response:', response);
             if (!response.ok) {
-                console.error(response.text())
+              const rep = await response.text();
+                console.error(rep)
               throw new Error(`HTTP error! status: ${response.status}`);
             }
             const projectID = await response.text();
