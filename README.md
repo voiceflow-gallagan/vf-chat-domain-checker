@@ -109,7 +109,7 @@ Be sure to replace `https://chatwidget-domain-checker.voiceflow.workers.dev` wit
             const projectID = await response.text();
             return projectID;
           } catch (error) {
-            console.error('Error fetching project ID:', error);
+            console.warning('Error fetching project ID:', error);
 
             throw error;
           }
@@ -123,7 +123,7 @@ Be sure to replace `https://chatwidget-domain-checker.voiceflow.workers.dev` wit
             versionID: 'development'
           });
         }).catch(error => {
-          console.error('Error loading chat widget:', error);
+          console.warning('Error loading chat widget:', error);
         });
       }
       v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
