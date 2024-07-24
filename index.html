@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>My Website</title>
+</head>
+<body>
+    <h1>Welcome to my website</h1>
+    <script>(function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        async function getProjectID() {
+          try {
+            console.log('Attempting to fetch project ID...');
+            const response = await fetch('https://chatwidget-domain-checker.voiceflow.workers.dev/', {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+            console.log('Fetch response:', response);
+            if (!response.ok) {
+                console.error(response.text())
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const projectID = await response.text();
+            console.log('Received project ID:', projectID);
+            return projectID;
+          } catch (error) {
+            console.error('Error fetching project ID:', error);
+
+            throw error;
+          }
+        }
+
+        getProjectID().then(projectID => {
+          console.log('Loading chat widget with project ID:', projectID);
+          window.voiceflow.chat.load({
+            verify: { projectID: projectID },
+            url: 'https://general-runtime.voiceflow.com',
+            versionID: 'development'
+          });
+        }).catch(error => {
+          console.error('Error loading chat widget:', error);
+        });
+      }
+      v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+    })(document, 'script');</script>
+</body>
+</html>
