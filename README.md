@@ -95,14 +95,12 @@ Be sure to replace `https://chatwidget-domain-checker.voiceflow.workers.dev` wit
       v.onload = function() {
         async function getProjectID() {
           try {
-            console.log('Attempting to fetch project ID...');
             const response = await fetch('https://chatwidget-domain-checker.voiceflow.workers.dev', {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
               },
             });
-            console.log('Fetch response:', response);
             if (!response.ok) {
               throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -110,13 +108,11 @@ Be sure to replace `https://chatwidget-domain-checker.voiceflow.workers.dev` wit
             return projectID;
           } catch (error) {
             console.warning('Error fetching project ID:', error);
-
             throw error;
           }
         }
 
         getProjectID().then(projectID => {
-          console.log('Loading chat widget with project ID:', projectID);
           window.voiceflow.chat.load({
             verify: { projectID: projectID },
             url: 'https://general-runtime.voiceflow.com',
